@@ -12,17 +12,13 @@ class Solution:
     def lowestCommonAncestor(
         self, root: TreeNode, p: TreeNode, q: TreeNode
     ) -> TreeNode:
-        self.result = None
+        if not root or root == p or root == q:
+            return root
 
-        def dfs(node):
-            if not node:
-                return 0
-            count = node == p or node == q
-            count += dfs(node.left)
-            count += dfs(node.right)
-            if count == 2 and not self.result:
-                self.result = node
-            return count
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
 
-        dfs(root)
-        return self.result
+        if left and right:
+            return root
+
+        return left or right

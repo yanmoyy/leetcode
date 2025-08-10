@@ -6,7 +6,6 @@ class Solution:
     def majorityElement(self, nums: List[int]) -> int:
         hash = defaultdict(int)
         res, majority = 0, 0
-
         for n in nums:
             hash[n] += 1
             if hash[n] > majority:
